@@ -4,28 +4,25 @@
 namespace chess {
 
 	struct Position {
-		Position() {
-			row = 0;
-			column = 0;
-		}
+		Position() = default;
 
-		Position(int myRow, int myColon) {
-			row = myRow;
-			column = myColon;
+		Position(int row, int column)
+			: row{row}
+			, column{column} {
 		}
 
 		Position operator+(const Position& p) {
-			return Position(row+p.row,column+p.column);
+			return {row + p.row, column + p.column};
 		}
 
 		Position operator*(int nbr) {
-			return Position(row*nbr,column*nbr);
+			return {row * nbr, column * nbr};
 		}
 
-		int row;
-		int column;
+		int row = 0;
+		int column = 0;
 	};
 
-} // Namespace chess.
+}
 
-#endif // POSITION_H
+#endif

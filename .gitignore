@@ -1,12 +1,16 @@
-#################
-#### MW
-#################
-
 *.wav
 *.7z
 *.zip
 *.mp3
 *.xcf
+*~
+.vs
+*.layout
+*.depend
+/build*
+/linux_build
+/vcpkg_installed/
+.vscode/
 
 #################
 ## Eclipse

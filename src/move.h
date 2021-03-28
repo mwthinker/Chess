@@ -9,20 +9,20 @@ namespace chess {
 	public:
 		Move() {}
 
-		Move(int sourceRow,int sourceColon, int destRow, int destColon) {
-			start = Position(sourceRow,sourceColon);
-			end = Position(destRow, destColon);
+		Move(int sourceRow, int sourceColon, int destRow, int destColon)
+			: start{sourceRow, sourceColon}
+			, end{destRow, destColon} {
 		}
 
-		Move(Position myStart, Position myEnd) {
-			start = myStart;
-			end = myEnd;
+		Move(Position start, Position end)
+			: start{start}
+			, end{end} {
 		}
 
-		Position start;
-		Position end;
+		Position start{};
+		Position end{};
 	};
 
-} // Namespace chess.
+}
 
-#endif // MOVE_H
+#endif

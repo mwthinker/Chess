@@ -1,18 +1,20 @@
-CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
-PROJECT(Chess)
-SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules/")
-if (WIN32)
-	# Exception handler model.
-	SET (CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /EHsc -D_SCL_SECURE_NO_WARNINGS")
-	SET (CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_DEBUG} /EHsc")
-	
-	ADD_DEFINITIONS(-D_CRT_SECURE_NO_WARNINGS -D_SCL_SECURE_NO_WARNINGS -DWIN32)
-else (WIN32)
-	SET(CMAKE_CXX_FLAGS "-std=c++11")
-endif (WIN32)
+cmake_minimum_required(VERSION 3.19)
+
+project(Chess
+	DESCRIPTION
+		"Chess simulator"
+	VERSION
+		0.1.0
+	LANGUAGES
+		CXX
+)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
 # Source files.
-SET(SOURCES_CHESS
+set(SOURCES_CHESS
 	src/alphabeta.h
 	src/bestmovealgorithm.h
 	src/chessai.h
@@ -30,6 +32,13 @@ SET(SOURCES_CHESS
 	src/random.h
 	src/value.h
 )
-# End of source files.
 
-ADD_EXECUTABLE(Chess ${SOURCES_CHESS})
+add_executable(Chess 
+	${SOURCES_CHESS}
+)
+
+target_compile_definitions(Chess
+	PRIVATE
+		D_CRT_SECURE_NO_WARNINGS
+		D_SCL_SECURE_NO_WARNINGS
+)

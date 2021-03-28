@@ -1,6 +1,8 @@
 #ifndef VALUE_H
 #define VALUE_H
 
+#include "move.h"
+
 #include <limits>
 
 namespace chess {
@@ -9,31 +11,35 @@ namespace chess {
 
 	class Value {
 	public:
-		Value(int value, Move bestMove) : value_(value), bestMove_(bestMove) {
+		Value(int value, Move bestMove)
+			: value_{value}
+			, bestMove_{bestMove} {
 		}
 
-		Value(int value) : value_(value) {
+		explicit Value(int value)
+			: value_{value} {
 		}
 
-		inline bool operator>(Value valueObj) const {
+		bool operator>(Value valueObj) const {
 			return value_ > valueObj.value_;
 		}
 
-		inline bool operator>=(Value valueObj) const {
+		bool operator>=(Value valueObj) const {
 			return value_ >= valueObj.value_;
 		}
 
-		inline int	value() const {
+		int value() const {
 			return value_;
 		}
 
-		inline Move bestMove() const {
+		Move bestMove() const {
 			return bestMove_;
 		}
 
-		inline Value operator-() const {
-			return  Value(value_*-1, bestMove_);
+		Value operator-() const {
+			return {value_*-1, bestMove_};
 		}
+		
 	private:
 		int value_;
 		Move bestMove_;
@@ -47,8 +53,8 @@ namespace chess {
 		}
 	}
 
-	const Value INF(std::numeric_limits<int>::max());
+	const Value Inf(std::numeric_limits<int>::max());
 
 }
 
-#endif // VALUE_H
+#endif

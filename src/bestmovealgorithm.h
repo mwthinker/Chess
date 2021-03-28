@@ -7,10 +7,11 @@ namespace chess {
 
 	class BestMoveAlgorithm {
 	public:
+		virtual ~BestMoveAlgorithm() = default;
+
 		virtual Move bestMove(const Chessboard& chessboard) = 0;
-		virtual ~BestMoveAlgorithm() {};
 	};
 
-} // Namespace chess.
+}
 
-#endif // BESTMOVEALGORITHM_H
+#endif

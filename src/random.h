@@ -5,13 +5,18 @@
 
 namespace chess {
 
-	// Returns a random number. The output is uniformly distributed on the interval [a, b).
-	float random() {
+	// Returns a random number. The output is uniformly distributed on the interval [min, max).
+	inline float random(float min, float max) {
 		static std::random_device rd;
 		static std::default_random_engine generator(rd());
-		static std::uniform_real_distribution<float> distribution(0.0,1.0);
-		return distribution(generator);
+		return std::uniform_real_distribution<float>{min, max}(generator);
 	}
+	
+	// Returns a random number. The output is uniformly distributed on the interval [0, 1).
+	inline float random() {
+		return random(0, 1);
+	}
+
 }
 
-#endif // RANDOM_H
+#endif

@@ -5,6 +5,9 @@
 #include "move.h"
 #include "bestmovealgorithm.h"
 #include "chessmoves.h"
+#include "value.h"
+
+#include <iostream>
 
 namespace chess {
 
@@ -25,10 +28,8 @@ namespace chess {
 	*/
 	class Negascout : public BestMoveAlgorithm {
 	public:
-		Negascout(int depth) {
-			depth_ = depth;
-			nbr_ = 0;
-			//std::cout << "\n" << bestMove;
+		explicit Negascout(int depth)
+			: depth_{depth} {
 		}
 
 		Move bestMove(const Chessboard& chessboardCONST) {
@@ -36,7 +37,7 @@ namespace chess {
 			Value alpha = -INF;
 			Chessboard chessboard = chessboardCONST;
 			chessboard.generateMoves();
-			int size = chessboard.nbrOfMoves();		
+			int size = chessboard.nbrOfMoves();
 			for (int i = 0; i < size; ++i) {
 				Chessboard tmp = chessboard;
 				tmp.move(chessboard[i]);
@@ -57,7 +58,7 @@ namespace chess {
 			for (int i = 0; i < size; ++i) {
 				Chessboard tmp = chessboard;
 				tmp.move(chessboard[i]);
-				alpha = max(alpha, -alphabeta(tmp,depth - 1,-beta, -alpha, bestMove));
+				alpha = std::max(alpha, -alphabeta(tmp,depth - 1,-beta, -alpha, bestMove));
 
 				if (alpha > beta) {
 					break;
@@ -66,16 +67,17 @@ namespace chess {
 
 			return alpha;
 		}
+	
 	private:
-		int nbr_;
-
 		bool terminal(Chessboard& chessboard) {
 			chessboard.generateMoves();
 			return chessboard.nbrOfMoves() == 0;
 		}
-		int depth_;
+
+		int nbr_ = 0;
+		int depth_ = 0;
 	};
 
-} // Namespace chess.
+}
 
-#endif // NEGASCOUT_H
+#endif

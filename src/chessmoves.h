@@ -8,20 +8,20 @@ namespace chess {
 
 	std::vector<Position> getPawnMovesCapture() {
 		std::vector<Position> moves;
-		moves.push_back(Position(1,1));
-		moves.push_back(Position(1,-1));
+		moves.push_back(Position{1,1});
+		moves.push_back(Position{1,-1});
 		return moves;
 	}
 
 	std::vector<Position> getPawnMoves() {
 		std::vector<Position> moves;
-		moves.push_back(Position(1,0));
+		moves.push_back(Position{1,0});
 		return moves;
 	}
 
 	std::vector<Position> getPawnSpecialMoves() {
 		std::vector<Position> moves;
-		moves.push_back(Position(2,0));
+		moves.push_back(Position{2,0});
 		return moves;
 	}
 
@@ -30,28 +30,28 @@ namespace chess {
 	}*/
 
 	std::vector<Position> getKnightMoves() {
-		std::vector<Position> moves;	
-		moves.push_back(Position(2,1));
-		moves.push_back(Position(2,-1));
-		moves.push_back(Position(1,2));
-		moves.push_back(Position(-1,2));
-		moves.push_back(Position(1,-2));
-		moves.push_back(Position(-1,-2));
-		moves.push_back(Position(-2,1));
-		moves.push_back(Position(-2,-1));
+		std::vector<Position> moves;
+		moves.push_back(Position{2,1});
+		moves.push_back(Position{2,-1});
+		moves.push_back(Position{1,2});
+		moves.push_back(Position{-1,2});
+		moves.push_back(Position{1,-2});
+		moves.push_back(Position{-1,-2});
+		moves.push_back(Position{-2,1});
+		moves.push_back(Position{-2,-1});
 		return moves;
 	}
 
 	std::vector<Position> getKingMoves() {
 		std::vector<Position> moves;
-		moves.push_back(Position(1,0));
-		moves.push_back(Position(1,-1));
-		moves.push_back(Position(0,-1));
-		moves.push_back(Position(-1,-1));
-		moves.push_back(Position(-1,0));
-		moves.push_back(Position(-1,1));
-		moves.push_back(Position(0,1));
-		moves.push_back(Position(1,1));
+		moves.push_back(Position{1,0});
+		moves.push_back(Position{1,-1});
+		moves.push_back(Position{0,-1});
+		moves.push_back(Position{-1,-1});
+		moves.push_back(Position{-1,0});
+		moves.push_back(Position{-1,1});
+		moves.push_back(Position{0,1});
+		moves.push_back(Position{1,1});
 		return moves;
 	}
 
@@ -82,6 +82,6 @@ namespace chess {
 	//moves_
 	}*/
 
-} // Namespace chess.
+}
 
-#endif // CHESSMOVES_H
+#endif

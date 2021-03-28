@@ -6,6 +6,8 @@
 #include "value.h"
 #include "bestmovealgorithm.h"
 
+#include <iostream>
+
 namespace chess {
 
 	/*
@@ -19,20 +21,18 @@ namespace chess {
 	*/
 	class MiniMax : public BestMoveAlgorithm {
 	public:
-		MiniMax(int depth) {
-			depth_ = depth;
-			nbr_ = 0;
-			//std::cout << "\n" << bestMove;
+		MiniMax(int depth)
+			: depth_{depth} {
 		}
 
 		Move bestMove(const Chessboard& chessboardCONST) {
 			nbr_ = 0;
-			Value alpha = -INF;
+			Value alpha = -Inf;
 			Chessboard chessboard = chessboardCONST;
 			chessboard.generateMoves();
-			int size = chessboard.nbrOfMoves();		
+			int size = chessboard.nbrOfMoves();
 			for (int i = 0; i < size; ++i) {
-				Chessboard tmp(chessboard,chessboard[i]);			
+				Chessboard tmp{chessboard,chessboard[i]};
 				++nbr_;
 				alpha = max(alpha, -miniMax(tmp,depth_ - 1,chessboard[i]));
 			}
@@ -43,29 +43,30 @@ namespace chess {
 		Value miniMax(Chessboard chessboard, int depth, Move bestMove) {
 			++nbr_;
 			if (depth == 0 || terminal(chessboard)) {
-				return Value(chessboard.value(),bestMove);
+				return Value{chessboard.value(), bestMove};
 			}
 
-			Value alpha = -INF;
+			Value alpha = -Inf;
 
 			int size = chessboard.nbrOfMoves();
 			for (int i = 0; i < size; ++i) {
-				Chessboard tmp(chessboard,chessboard[i]);
+				Chessboard tmp{chessboard,chessboard[i]};
 				alpha = max(alpha, -miniMax(tmp,depth - 1, bestMove));
 			}
 
 			return alpha;
 		}
-	private:
-		int nbr_;
 
+	private:
 		bool terminal(Chessboard& chessboard) {
 			chessboard.generateMoves();
 			return chessboard.nbrOfMoves() == 0;
 		}
-		int depth_;
+
+		int nbr_ = 0;
+		int depth_ = 0;
 	};
 
-} // Namespace chess.
+}
 
-#endif // MINIMAX_H
+#endif

@@ -45,6 +45,6 @@ namespace chess {
 		BestMoveAlgorithm* bestMoveAlgorithm_;
 	};
 
-} // Namespace chess.
+}
 
-#endif // CHESSAI_H
+#endif

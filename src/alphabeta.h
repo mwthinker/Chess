@@ -16,7 +16,7 @@ namespace chess {
 	if  depth = 0 or node is a terminal node
 	return the heuristic value of node
 	for each child of node
-	alpha := max(alpha, -alphabeta(child, depth-1, -beta, -alpha))     
+	alpha := max(alpha, -alphabeta(child, depth-1, -beta, -alpha))
 	(* use symmetry, -beta becomes subsequently pruned alpha *)
 	if beta<=alpha
 	break	(* Beta cut-off *)
@@ -27,12 +27,13 @@ namespace chess {
 	*/
 	class AlphaBeta : public BestMoveAlgorithm {
 	public:
-		AlphaBeta(int depth) : depth_(depth) {
+		AlphaBeta(int depth)
+			: depth_(depth) {
 		}
 
 		Move bestMove(const Chessboard& chessboardCONST) override {
 			Chessboard chessboard = chessboardCONST;
-			Value value = alphabeta(chessboard,depth_,-INF,INF,Move(),true);
+			Value value = alphabeta(chessboard, depth_, -Inf, Inf, Move{}, true);
 			return value.bestMove();
 		}
 
@@ -44,7 +45,7 @@ namespace chess {
 
 				int size = chessboard.nbrOfMoves();
 				for (int i = 0; i < size; ++i) {
-					Chessboard tmp(chessboard,chessboard[i]);
+					Chessboard tmp{chessboard,chessboard[i]};
 					if (firstTime) {
 						bestMove = chessboard[i];
 					}
@@ -63,25 +64,25 @@ namespace chess {
 			return chessboard.nbrOfMoves() == 0;
 		}
 
-		const int depth_;
-	};	
+		int depth_ = 0;
+	};
 
 	class IterativeDeepening : public BestMoveAlgorithm {
 	public:
-		IterativeDeepening(int timeLength) {
-			timeLength_ = timeLength;
+		IterativeDeepening(int timeLength)
+			: timeLength_{timeLength} {
 		}		
 
 		Move bestMove(const Chessboard& chessboardCONST) override {
 			whiteToMove_ = chessboardCONST.isWhiteToMove();
 			Chessboard chessboard = chessboardCONST;
 			int depth = 1;
-			Value value = alphabeta(chessboard,depth,-INF,INF,Move(),true);
+			Value value = alphabeta(chessboard, depth, -Inf, Inf, Move{}, true);
 
 			int startTime_ = (int) ::time(0);
 			while (startTime_ + timeLength_ > ::time(0)) {
 				Chessboard chessboard = chessboardCONST;
-				value = alphabeta(chessboard,++depth,-INF,INF,Move(),true);
+				value = alphabeta(chessboard, ++depth, -Inf, Inf, Move{}, true);
 				std::cout << "|" << depth;
 			}
 			std::cout << "|";
@@ -92,12 +93,12 @@ namespace chess {
 		Value alphabeta(Chessboard& chessboard, int depth, Value alpha, 
 			Value beta,Move bestMove, bool firstTime) {
 				if (depth == 0 || terminal(chessboard)) {
-					return Value(chessboard.value(),bestMove);
+					return Value{chessboard.value(), bestMove};
 				}
 
 				int size = chessboard.nbrOfMoves();
 				for (int i = 0; i < size; ++i) {
-					Chessboard tmp(chessboard,chessboard[i]);
+					Chessboard tmp{chessboard, chessboard[i]};
 					if (firstTime) {
 						bestMove = chessboard[i];
 					}
@@ -118,12 +119,13 @@ namespace chess {
 			return chessboard.nbrOfMoves() == 0;
 		}
 
-		int timeLength_, startTime_;
-		bool whiteToMove_;		
+		int timeLength_;
+		int startTime_ = 0;
+		bool whiteToMove_ = true;
 
 		std::vector<int> moveOrders_;
 	};
 
-} // Namespace chess.
+}
 
-#endif // ALPHABETA_H
+#endif

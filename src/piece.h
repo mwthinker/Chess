@@ -3,13 +3,24 @@
 
 namespace chess {
 
-	enum Type {KING, QUEEN, ROOK, BISHOP, KNIGHT, PAWN, NONE};
+	enum class Type : char {
+		King = 'K',
+		Queen = 'D',
+		Rook = 'T',
+		Bishop = 'L',
+		Knight = 'S',
+		Pawn = 'B',
+		None = '-'
+	};
 
 	class Piece {
 	public:
-		Piece() : type_(NONE) {}
+		Piece() = default;
 
-		Piece(Type type, bool white) : type_(type), white_(white) {}
+		Piece(Type type, bool white)
+			: type_{type}
+			, white_{white} {
+		}
 
 		inline bool isWhite() const {
 			return white_;
@@ -20,10 +31,10 @@ namespace chess {
 		}
 
 	private:
-		Type type_;
-		bool white_;
+		Type type_ = Type::None;
+		bool white_ = true;
 	};
 
-} // Namespace chess.
+}
 
-#endif // PIECE_H
+#endif

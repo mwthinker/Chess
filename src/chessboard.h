@@ -7,7 +7,7 @@
 
 #include <vector>
 #include <string>
-#include <algorithm> // std::swap
+#include <algorithm>
 
 namespace chess {
 
@@ -22,30 +22,35 @@ namespace chess {
 		}
 
 		Piece pieceAt(int row, int column) const;
+
 		int value() const;
+		
 		void move(Move move);
 
 		inline int nbrOfMoves() const {
-			return moves_.size();
+			return static_cast<int>(moves_.size());
 		}
+
 		inline Move operator[](int nbr) const {
 			return moves_[nbr];
 		}
+		
 		inline static bool insideBoard(int row, int column) {
 			return row > 0 && row < 9 && column > 0 && column < 9;
 		}
 
 		void generateMoves();
 
-		inline std::vector<Position> whiteTeam() {
+		inline std::vector<Position> whiteTeam() const {
 			return whiteTeam_;
 		}
 
-		inline std::vector<Position> blackTeam() {
+		inline std::vector<Position> blackTeam() const {
 			return blackTeam_;
 		}
 
 		void testBoard();
+
 	private:
 		void generatePawnMoves(const Position& position, bool white, std::vector<Move>& moves);
 		void generateKnightMoves(const Position& position, bool white, std::vector<Move>& moves);
@@ -68,6 +73,6 @@ namespace chess {
 		std::vector<Move> moves_;
 	};
 
-} // Namespace chess.
+}
 
-#endif // CHESSBOARD_H
+#endif

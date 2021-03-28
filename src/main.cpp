@@ -5,7 +5,6 @@
 #include "chessai.h"
 #include "printfunctions.h"
 
-using namespace std;
 using namespace chess;
 
 void test() {
@@ -19,17 +18,17 @@ void test2() {
 	IterativeDeepening iterative(3);
 	ChessAi ai(&iterative);
 	
-	cout << "Turn 0" << "\n" << ai.chessboard() << "\n";
+	std::cout << "Turn 0" << "\n" << ai.chessboard() << "\n";
 
 	for (int i = 1; i <= 50; ++i) {		
-		cout << "\nTurn " << i;
+		std::cout << "\nTurn " << i;
 		if (ai.isWhiteToMove()) {
-			cout << "\nWhite ";
+			std::cout << "\nWhite ";
 		} else {
-			cout << "\nBlack ";
+			std::cout << "\nBlack ";
 		}
-		cout << "\nMoves " << ai.makeMove();
-		cout << "\n" << ai.chessboard() << "\n";
+		std::cout << "\nMoves " << ai.makeMove();
+		std::cout << "\n" << ai.chessboard() << "\n";
 	}
 }
 
@@ -38,6 +37,6 @@ int main() {
 	test2();
 
 	char a[10];
-	cin >> a;
+	std::cin >> a;
 	return 0;
 }

@@ -10,7 +10,9 @@ namespace chess {
 
 	class Pawn : public Piece {
 	public:
-		Pawn(bool white, int row, int column, ChessboardInterface* chessboard) : Piece(PAWN, white, row, column, chessboard) {
+		Pawn(bool white, int row, int column, ChessboardInterface* chessboard)
+			: Piece(PAWN, white, row, column, chessboard) {
+			
 			moves_ = generatePossibleMoves();
 		}
 
@@ -489,6 +491,6 @@ namespace chess {
 		std::vector<Move> moves_;
 	};
 
-} // Namespace chess.
+}
 
-#endif // PAWN_H
+#endif
